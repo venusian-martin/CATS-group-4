@@ -29,7 +29,7 @@ param_grid = {
 
 rf = RandomForestClassifier()
 # Instantiate the grid search model
-grid_search = GridSearchCV(estimator = rf, param_grid = param_grid, cv = 5, n_jobs = -1, scoring='roc_auc')
+grid_search = GridSearchCV(estimator = rf, param_grid = param_grid, cv = 5, n_jobs = -1)
 
 grid_search.fit(train_features, train_labels)
 grid_search.best_params_
@@ -42,11 +42,6 @@ y_pred = grid_search.predict(test_features)
 rf_probs = grid_search.predict_proba(test_features)[:, 1]
 print(rf_probs)
 
-plt.subplots()
-plt.scatter(test_labels, y_pred)
-plt.xlabel("Real"), plt.ylabel("Prediction")
-plt.title('Real vs Predicted')
-plt.show()
 
 #print(y_pred)
 roc_value = roc_auc_score(test_labels, y_pred)
