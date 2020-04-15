@@ -5,7 +5,7 @@ dataset_size<-dim(dataset)
 pvalue<-c() #initialize vector
 
 #loop to generate contingency table per feature and save pvalues in vector
-for (i in 1:(length(dataset)-1)) {
+for (i in 2:(length(dataset)-1)) {
   factor_chrom <- as.factor(dataset[,i])
   contingency_table<-table(subgroups, factor_chrom)
   fisher<- fisher.test(contingency_table)
@@ -17,4 +17,4 @@ for (i in 1:(length(dataset)-1)) {
 columns<-colnames(dataset[,-length(dataset)]) #vector of column names (features)
 chrom_pvalue<- data.frame(columns, pvalue) #dataframe of pvalue next to feature
 ranking<-chrom_pvalue[order(pvalue), ] #ascendent order of pvalues
-write.cv(ranking, file="./ranking.csv")
+write.csv(ranking, file="./ranking.csv")
