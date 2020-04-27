@@ -36,6 +36,7 @@ Best_hyperparam = pd.DataFrame()
 
 #defining list to append accuracy values per splitted data
 ACCURACY_SUMMARY = []
+ACCURACY_TABLE = pd.DataFrame()
 
 #defining dataframe to save predictions and feature importance for each splitted data
 Predictions_total = pd.DataFrame()
@@ -116,7 +117,7 @@ for n, m in zip(train,test):
         #feature importance of each repetition
         Feature_importance_rep = pd.DataFrame({'Chromosome id': chromosomesid, 'Importance': importance})
         #saving it into fold feature importance dataframe
-        Feature_importance_fold = pd.concat([Feature_importance_fold, Feature_importance_rep], axis = 1)
+        Feature_importance_fold = pd.concat([Feature_importance_fold, Feature_importance_rep], axis = 0)
 
 
         ##### Predicting #####
@@ -143,6 +144,7 @@ for n, m in zip(train,test):
     Feature_importance_total = pd.concat([Feature_importance_total, Feature_importance_fold], axis = 0)
     #dataframe with accuracy per repetition
     ACCURACY_FOLD = pd.DataFrame({'Repetition': rep, 'Accuracy': Accuracy_score_fold})
+    ACCURACY_TABLE = pd.concat([ACCURACY_TABLE, ACCURACY_FOLD], axis = 1)
     #compute mean accuracy per fold
     mean_acc_fold = np.mean(Accuracy_score_fold)
     #save mean accuracy per fold
@@ -159,6 +161,7 @@ print('Mean final accuracy:')
 print(ACCURACY_FINAL)
 
 #save a file with the best hyperparameters, the feature importance and with the predictions
+ACCURACY_TABLE.to_csv(r'accuracies_dataset.txt', sep='\t', mode = 'a')
 Best_hyperparam.to_csv(r'best_hyperparameters.txt', sep='\t', mode = 'a')
 Feature_importance_total.to_csv(r'feature_importance.txt', sep='\t', mode='a')
 Predictions_total.to_csv(r'Predictions_total.txt', sep='\t', mode='a')
