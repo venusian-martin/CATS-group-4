@@ -3,16 +3,14 @@ f = "transposed_dataset.txt"
 dataset = read.delim(f)
 
 # set ranges
-range_1 = 1:20
-range_2 = 21:40
-range_3 = 41:60
-range_4 = 61:80
-range_5 = 81:100
+range_1 = 1:33
+range_2 = 34:66
+range_3 = 67:100
 
-start = c(1, 21, 41, 60, 80)
-end = c(20, 40, 60, 80, 100)
+start = c(1, 34, 67)
+end = c(33, 66, 100)
 
-training_sets = list(range_1, range_2, range_3, range_4, range_5)
+training_sets = list(range_1, range_2, range_3)
 
 for (range in 1:length(training_sets)){
   print("entered range loop")
