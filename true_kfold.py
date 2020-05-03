@@ -13,7 +13,8 @@ df = pd.read_csv("transposed_dataset.txt", delimiter = "\t", index_col = 0)
 order_iter = pd.read_csv("shuffled_rows_df.txt", delimiter = "\t", index_col = 0)
 
 all_mean_accuracies = []
-
+fold_accuracies = []
+fold_features = []
 # repeat 50 times:
 for it in range(0, 4):
     # reorder rows
@@ -40,8 +41,7 @@ for it in range(0, 4):
     testing = [test_1, test_2, test_3]
     ranks = [ranking_1, ranking_2, ranking_3]
 
-    fold_accuracies = []
-    fold_features = []
+
     for tr, te, r in zip(training, testing, ranks):
 
         # remove initial X from feature names (not found in pandas dataset)
