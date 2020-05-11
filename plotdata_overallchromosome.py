@@ -7,9 +7,8 @@ import pandas as pd
 
 file = open('Train_call.txt')
 input = file.readlines()
-#print(input[0])
 
-
+# count the number of '-1','0','1','2' for every chromosome and print them 
 for j in range(1,24):
     count_min1=0
     count_0 = 0
