@@ -31,10 +31,13 @@ df = pd.DataFrame(raw_data)
 
 # From raw value to percentage
 totals = [i + j + k + l for i, j, k, l in zip(df['-1'], df['0'], df['1'], df['2'])]
-
+# greenbars represent the '-1'
 greenBars = [i / j * 100 for i, j in zip(df['-1'], totals)]
+# orangebars represent the '0'
 orangeBars = [i / j * 100 for i, j in zip(df['0'], totals)]
+# blue bars represent the '1'
 blueBars = [i / j * 100 for i, j in zip(df['1'], totals)]
+# redbars represent the '2'
 redBars = [i / j * 100 for i, j in zip(df['2'], totals)]
 
 # plot
